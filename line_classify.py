@@ -5,6 +5,7 @@ import os
 import json
 import datetime
 import re
+
 stemmer = LancasterStemmer()
 # 3 classes of training data
 training_data = []
@@ -23,6 +24,18 @@ training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Bisect li
 training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Divide line AB in two parts"})
 training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a bisector of line $point_pair"})
 training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a perpindicular bisector of $point_pair"})
+training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Divide the line $point_pair in two parts"})
+training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Cut the line $point_pair in two equal halves"})
+for a in range(ord('A'),ord('D')):
+    for b in range(a,ord('G')):
+        training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Bisect line "+chr(a)+chr(b)})
+        training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a bisector of line "+chr(a)+chr(b)})
+        training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a perpindicular bisector of "+chr(a)+chr(b)})
+        training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular to "+chr(a)+chr(b)})
+        training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular of "+chr(a)+chr(b)})
+        training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Construct a perpindicular of "+chr(a)+chr(b)})
+        
+       
 
 training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular to $point_pair"})
 training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular of $point_pair"})
@@ -33,7 +46,6 @@ training_data.append({"class":"Join, points: $point_pair", "sentence":"Connect $
 
 training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Join the point $point1 and $point2"})
 training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Connect the point $point1 and $point2"})
-
 
 print ("%s sentences in training data" % len(training_data))
 words = []
