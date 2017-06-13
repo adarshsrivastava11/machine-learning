@@ -34,6 +34,8 @@ for a in range(ord('A'),ord('D')):
         training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular to "+chr(a)+chr(b)})
         training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular of "+chr(a)+chr(b)})
         training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Construct a perpindicular of "+chr(a)+chr(b)})
+        training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Join the point "+chr(a)+" and "+chr(b)})
+        training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Connect the point "+chr(a)+" and "+chr(b)})
         
        
 
@@ -175,6 +177,8 @@ def classify(sentence, show_details=False):
     return return_results
 
 units1 = ['cm','mm','km','to','of','by','is','it','an','in']
+length=""
+points_pairs1=""
 myinput = raw_input()
 while myinput != "BYE":
 
