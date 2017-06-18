@@ -14,8 +14,8 @@ sock_circle.connect("tcp://127.0.0.1:5002")
 # Send a "message" using the socket
 input_sentence = raw_input()
 sock_line.send(input_sentence)
-json_line = sock_line.recv()
-print json_line
+max_output_line = sock_line.recv()
+print max_output_line
 sock_circle.send(input_sentence)
-json_circle = sock_circle.recv()
-print json_circle
+max_output_circle = sock_circle.recv()
+print max_output_circle

@@ -182,20 +182,22 @@ def classify(sentence, show_details=False):
     results = [[i,r] for i,r in enumerate(results) if r>ERROR_THRESHOLD ] 
     results.sort(key=lambda x: x[1], reverse=True) 
     return_results =[[classes[r[0]],r[1]] for r in results]
-    data_length = len(return_results)
-    full_command = ""
-    prob = ""
-    for i in range(0,data_length):
-        full_command = return_results[i][0]+"+"+full_command
-        prob = str(return_results[i][1])+"*"+prob
-    response_string = full_command+"#"+prob
-    return response_string
+    length = len(return_results)
+    max = 0.0
+    max_index = 0
+    if length > 1:
+        max = return_results[0][1]
+        for i in range(0,length):
+            if (return_results[i][1] > max):
+                max = return_results[i][1]
+                max_index = i
+    results = []
+    results.append(return_results[max_index][0])
+    results.append(return_results[max_index][1])
+    return results
 
-units1 = ['cm','mm','km','to','of','by','is','it','an','in']
-length=""
-points_pairs1=""
 while True:
-    myinput = sock.recv()
+    
     # length = re.findall(r'\d+',myinput)
     # digits_removed = ''.join([i for i in myinput if not i.isdigit()])
     # digits_removed = digits_removed.split(' ')
@@ -207,7 +209,10 @@ while True:
 
     # length = ''.join(length)
 
-
+    myinput = sock.recv()
     myoutput = classify(myinput)
-    sock.send(myoutput)
+    sentence = ''.join(myoutput[0])
+    probility = ''.join(str(myoutput[1]))
+    output = sentence+"#"+probility
+    sock.send(output)
     
