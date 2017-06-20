@@ -3,6 +3,13 @@ import sys
 import time
 import re
 
+context = zmq.Context()
+sock_circle = context.socket(zmq.REQ)
+sock_line = context.socket(zmq.REQ)
+sock_geo_mapper = context.socket(zmq.PAIR)
+sock_geo_mapper.bind("tcp://127.0.0.1:5102")
+sock_line.connect("tcp://127.0.0.1:5000")
+sock_circle.connect("tcp://127.0.0.1:5002")
 units = ["cm","mm","km","is","an","us","kg","of","at"]
 def line_info(input_sentence,max_output_line):
     length = re.findall("\d+\.\d+", input_sentence)
@@ -17,13 +24,9 @@ def line_info(input_sentence,max_output_line):
     processed_string = processed_string.replace("$point_pair",points_pairs1)
     processed_string = processed_string.split('#')[0]
     processed_string = ''.join(processed_string)
+    sock_geo_mapper.send(processed_string)
     return processed_string
 
-context = zmq.Context()
-sock_circle = context.socket(zmq.REQ)
-sock_line = context.socket(zmq.REQ)
-sock_line.connect("tcp://127.0.0.1:5000")
-sock_circle.connect("tcp://127.0.0.1:5002")
 prob = []
 while True:
     input_sentence = raw_input()
@@ -31,8 +34,6 @@ while True:
     max_output_line = sock_line.recv()
     prob_line = float(max_output_line.split('#')[1])
     prob.append(prob_line)
-    # test = line_info(input_sentence,max_output_line)
-    # print test
     sock_circle.send(input_sentence)
     max_output_circle = sock_circle.recv()
     prob_circle = float(max_output_circle.split('#')[1])
@@ -43,9 +44,10 @@ while True:
         if prob[i] >= maximum:
             maximum = prob[i]
             index = i
+    prob = []
+    time.sleep(0.5)
     if (index == 0):
         test = line_info(input_sentence,max_output_line)
         print test
-
-    # print max_output_circle
-    
+       
+       
