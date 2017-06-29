@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Drawing</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.scale(4,4);
+function drawLine(px1,py1,px2,py2){
+	ctx.moveTo(50+px1,50+py1);
+	ctx.lineTo(50+px2,50+py2);
+	
+	ctx.stroke();
+}
+function drawText(text,px,py){
+	ctx.font = "6px Arial";
+	ctx.fillStyle = "red";
+	ctx.fillText(text,50+px,50+py);
+}
+function drawArc(px,py,radius){
+	ctx.beginPath();
+	ctx.arc(px,py,radius);
+	ctx.stroke();
+}
+function drawCircle(px,py,radius){
+	ctx.beginPath();
+	ctx.arc(px,py,radius,0,2*Math.PI);
+	ctx.stroke();
+}
+
+
+
+</script>
+<script src="draw_command.js">
+</script>
+</body>
+</html>

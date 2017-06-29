@@ -50,6 +50,10 @@ def lineMapper(points,length):
         p2_y = 0
     else:
         Coordinates_Points_Map.update({p2:{'x':p2_x,'y':p2_y}})
+        fo = open("draw_command.js", "a")
+        fo.write("drawLine("+str(Coordinates_Points_Map[p1]['x'])+","+str(Coordinates_Points_Map[p1]['y'])+","+str(Coordinates_Points_Map[p2]['x'])+","+str(Coordinates_Points_Map[p2]['y'])+");");
+        fo.write("drawText(\'"+str(p1)+"\',"+str(Coordinates_Points_Map[p1]['x'])+","+str(Coordinates_Points_Map[p1]['y'])+");")
+        fo.write("drawText(\'"+str(p2)+"\',"+str(Coordinates_Points_Map[p2]['x'])+","+str(Coordinates_Points_Map[p2]['y'])+");")
         print Coordinates_Points_Map
 def bisectorMapper(points,length):
     if not length:

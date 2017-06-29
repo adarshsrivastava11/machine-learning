@@ -12,7 +12,7 @@ sock_line.connect("tcp://127.0.0.1:5000")
 sock_circle.connect("tcp://127.0.0.1:5002")
 units = ["cm","mm","km","is","an","us","kg","of","at"]
 def line_info(input_sentence,max_output_line):
-    length = re.findall("\d+\.\d+", input_sentence)
+    length = re.findall("\d+\.\d+", input_sentence) 
     digits_removed = ''.join([i for i in input_sentence if not i.isdigit()])
     digits_removed = digits_removed.split(' ')
     for points_pairs in digits_removed:

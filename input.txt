@@ -1,0 +1,4 @@
+Draw a line AB of length 10 cm
+Draw a line BC of length 20 cm
+Draw a line CD of length 40.89 cm
+
