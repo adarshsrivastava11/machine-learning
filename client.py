@@ -6,8 +6,8 @@ import re
 context = zmq.Context()
 sock_circle = context.socket(zmq.REQ)
 sock_line = context.socket(zmq.REQ)
-sock_geo_mapper = context.socket(zmq.PAIR)
-sock_geo_mapper.bind("tcp://127.0.0.1:5102")
+sock_geo_mapper = context.socket(zmq.PUB)
+sock_geo_mapper.connect("tcp://127.0.0.1:5559")
 sock_line.connect("tcp://127.0.0.1:5000")
 sock_circle.connect("tcp://127.0.0.1:5002")
 units = ["cm","mm","km","is","an","us","kg","of","at"]
@@ -24,11 +24,13 @@ def line_info(input_sentence,max_output_line):
     processed_string = processed_string.replace("$point_pair",points_pairs1)
     processed_string = processed_string.split('#')[0]
     processed_string = ''.join(processed_string)
-    sock_geo_mapper.send(processed_string)
+    sock_geo_mapper.send("%d@%s" % (0, processed_string))
+    # sock_geo_mapper.send(processed_string)
     return processed_string
 
 prob = []
 while True:
+
     input_sentence = raw_input()
     sock_line.send(input_sentence)
     max_output_line = sock_line.recv()

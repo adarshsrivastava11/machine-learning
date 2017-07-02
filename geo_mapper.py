@@ -8,8 +8,10 @@ import sys
 import zmq
 
 context = zmq.Context()
-socket = context.socket(zmq.PAIR)
-socket.connect("tcp://127.0.0.1:5102")
+socket = context.socket(zmq.SUB)
+socket.connect("tcp://127.0.0.1:5560")
+topicfilter = "0"
+socket.setsockopt(zmq.SUBSCRIBE, topicfilter)
 
 def Geometry(filteredTokens):
     units = ['cm','mm','m','km']
@@ -125,6 +127,8 @@ def circleHandler(filteredTokens,units):
            
 while True:
     input_sentence = socket.recv()
+    print input_sentence
+    input_sentence = input_sentence.split('@')[1]
     command = input_sentence.split(',')[0]
     if command == "Line":
         point_pair = input_sentence.split(',')[1]
