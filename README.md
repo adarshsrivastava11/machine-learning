@@ -1,5 +1,5 @@
 # machine-learning
-![alt text](https://raw.githubusercontent.com/adarshsrivastava11/machine-learning/master/Space_view.jpg)
+![alt text](/machine-learning/master/Space_view.jpg)
 
 Testing the process involved in machine learning.
 ## How to run - 
