@@ -1,5 +1,5 @@
 # machine-learning
-![alt text](https://raw.githubusercontent.com/adarshsrivastava11/machine-learning/master/Space_view.png "Flow Diagram")
+![alt text](Space_view.png "Flow Diagram")
 
 Testing the process involved in machine learning.
 ## How to run - 
