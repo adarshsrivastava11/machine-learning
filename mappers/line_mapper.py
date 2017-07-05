@@ -1,16 +1,17 @@
 from pymongo import MongoClient
 from pprint import pprint
 from datetime import datetime
+
 client = MongoClient()
 db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
-coll_coordinates.drop()
+
 def lineMapper(points,length,user):
     
     p1 = points[1].upper()
     p2 = points[2].upper()
-    if (coll_coordinates.count() == 0):
+    if (coll_coordinates.count({"user":user}) == 0):
         coordinates_map = {
             "user" : user,
             "point_name" : "",
@@ -41,6 +42,6 @@ def lineMapper(points,length,user):
     # fo.write("drawText(\'"+str(p1)+"\',"+str(Coordinates_Points_Map[p1]['x'])+","+str(Coordinates_Points_Map[p1]['y'])+");")
     # fo.write("drawText(\'"+str(p2)+"\',"+str(Coordinates_Points_Map[p2]['x'])+","+str(Coordinates_Points_Map[p2]['y'])+");")
     # fo.close()
-    cursor = coll_coordinates.find({})
+    cursor = coll_coordinates.find({"user":user})
     for document in cursor: 
         pprint(document)

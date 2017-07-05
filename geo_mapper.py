@@ -16,13 +16,12 @@ client = MongoClient()
 db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
-coll_coordinates.drop()
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
 socket.connect("tcp://127.0.0.1:"+geomapper_port)
 username = sys.argv[1] #username should go here
 socket.setsockopt(zmq.SUBSCRIBE, username)
-
+coll_coordinates.remove({"user":username})
            
 while True:
     input_sentence = socket.recv()
