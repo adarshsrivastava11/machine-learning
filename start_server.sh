@@ -1,4 +1,4 @@
 source env/bin/activate
-python server_line.py &
-python server_circle.py &
-python device.py &
+python servers/server_line.py &
+python servers/server_circle.py &
+python connector-devices/client_geomapper.py &

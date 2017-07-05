@@ -157,7 +157,7 @@ def bow(sentence, words, show_details=False):
 # probability threshold
 ERROR_THRESHOLD = 0.2
 # load our calculated synapse values
-synapse_file = 'synapses_line.json' 
+synapse_file = 'training_result/synapses_line.json' 
 with open(synapse_file) as data_file: 
     synapse = json.load(data_file) 
     synapse_0 = np.asarray(synapse['synapse0']) 

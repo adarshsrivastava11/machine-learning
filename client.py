@@ -2,15 +2,24 @@ import zmq
 import sys
 import time
 import re
+import ConfigParser
 
+config = ConfigParser.RawConfigParser()  
+config.read('config.ini')
+client_port = config.get('devices', 'client')
+line_server_port = config.get('server-client', 'line-server') 
+circle_server_port = config.get('server-client', 'circle-server')
+username = sys.argv[1]
 context = zmq.Context()
 sock_circle = context.socket(zmq.REQ)
 sock_line = context.socket(zmq.REQ)
 sock_geo_mapper = context.socket(zmq.PUB)
-sock_geo_mapper.connect("tcp://127.0.0.1:5559")
-sock_line.connect("tcp://127.0.0.1:5000")
-sock_circle.connect("tcp://127.0.0.1:5002")
+sock_geo_mapper.connect("tcp://127.0.0.1:"+client_port)
+sock_line.connect("tcp://127.0.0.1:"+line_server_port)
+sock_circle.connect("tcp://127.0.0.1:"+circle_server_port)
+
 units = ["cm","mm","km","is","an","us","kg","of","at"]
+
 def line_info(input_sentence,max_output_line):
     length = re.findall("\d+\.\d+", input_sentence) 
     digits_removed = ''.join([i for i in input_sentence if not i.isdigit()])
@@ -24,11 +33,11 @@ def line_info(input_sentence,max_output_line):
     processed_string = processed_string.replace("$point_pair",points_pairs1)
     processed_string = processed_string.split('#')[0]
     processed_string = ''.join(processed_string)
-    sock_geo_mapper.send("%d@%s" % (0, processed_string))
-    # sock_geo_mapper.send(processed_string)
+    sock_geo_mapper.send("%s@%s" % (username, processed_string))
     return processed_string
 
 prob = []
+
 while True:
 
     input_sentence = raw_input()
