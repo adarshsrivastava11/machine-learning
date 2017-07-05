@@ -29,11 +29,18 @@ def line_info(input_sentence,max_output_line):
             if points_pairs not in units:
                 points_pairs1 = ''.join(points_pairs)
     length = ''.join(length)
-    processed_string = max_output_line.replace("$length",length)
+    max_output_line = eval(max_output_line)
+    raw_string = max_output_line["sentence"]
+    processed_string = raw_string.replace("$length",length)
     processed_string = processed_string.replace("$point_pair",points_pairs1)
-    processed_string = processed_string.split('#')[0]
-    processed_string = ''.join(processed_string)
-    sock_geo_mapper.send("%s@%s" % (username, processed_string))
+    command = processed_string.split(',')[0]
+    print command
+    processed_dict = {
+        "command":command,
+        "end_points":points_pairs1,
+        "length":length,
+    }
+    sock_geo_mapper.send("%s@%s" % (username, str(processed_dict)))
     return processed_string
 
 prob = []
@@ -42,12 +49,16 @@ while True:
 
     input_sentence = raw_input()
     sock_line.send(input_sentence)
+
     max_output_line = sock_line.recv()
-    prob_line = float(max_output_line.split('#')[1])
+    print max_output_line
+    max_output_line = eval(max_output_line)
+    prob_line = float(max_output_line["prob"])
     prob.append(prob_line)
     sock_circle.send(input_sentence)
     max_output_circle = sock_circle.recv()
-    prob_circle = float(max_output_circle.split('#')[1])
+    max_output_circle = eval(max_output_circle)
+    prob_circle = float(max_output_circle["prob"])
     prob.append(prob_circle)
     maximum = 0.0
     index = 0
@@ -58,7 +69,7 @@ while True:
     prob = []
     time.sleep(0.5)
     if (index == 0):
-        test = line_info(input_sentence,max_output_line)
+        test = line_info(input_sentence,str(max_output_line))
         print test
        
        

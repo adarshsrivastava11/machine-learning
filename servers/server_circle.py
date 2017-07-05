@@ -169,5 +169,9 @@ while True:
     myoutput = classify(myinput)
     sentence = ''.join(myoutput[0])
     probility = ''.join(str(myoutput[1]))
-    output = sentence+"#"+probility
+    output = {
+        "sentence":sentence,
+        "prob":probility,
+    }
+    output = str(output)
     sock.send(output)

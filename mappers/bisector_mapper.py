@@ -9,8 +9,8 @@ coll_coordinates.drop()
 def bisectorMapper(points,length,user):
     if not length:
         length = ['50']
-    p1 = points[1].upper()
-    p2 = points[2].upper()
+    p1 = points[0].upper()
+    p2 = points[1].upper()
     try:
         get_point_1 = coll_coordinates.find_one({"point_name" : p1,"user":user})
         p1_x = get_point_1.get('point_x')

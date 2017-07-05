@@ -9,8 +9,8 @@ coll_lines = db['lines']
 
 def lineMapper(points,length,user):
     
-    p1 = points[1].upper()
-    p2 = points[2].upper()
+    p1 = points[0].upper()
+    p2 = points[1].upper()
     if (coll_coordinates.count({"user":user}) == 0):
         coordinates_map = {
             "user" : user,

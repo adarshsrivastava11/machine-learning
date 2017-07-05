@@ -197,22 +197,15 @@ def classify(sentence, show_details=False):
     return results
 
 while True:
-    
-    # length = re.findall(r'\d+',myinput)
-    # digits_removed = ''.join([i for i in myinput if not i.isdigit()])
-    # digits_removed = digits_removed.split(' ')
-    # for points_pairs in digits_removed:
-    #     if len(points_pairs) == 2:
-    #         if points_pairs not in units1:
-    #             points_pairs1 = ''.join(points_pairs)
-
-
-    # length = ''.join(length)
 
     myinput = sock.recv()
     myoutput = classify(myinput)
     sentence = ''.join(myoutput[0])
     probility = ''.join(str(myoutput[1]))
-    output = sentence+"#"+probility
+    output = {
+        "sentence":sentence,
+        "prob":probility,
+    }
+    output = str(output)
     sock.send(output)
     
