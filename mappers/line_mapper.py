@@ -7,8 +7,13 @@ db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
 
+
 def lineMapper(points,length,user):
-    
+
+    lines_map = {
+    "user":user,
+    "time_added":datetime.now(),
+    }
     p1 = points[0].upper()
     p2 = points[1].upper()
     if (coll_coordinates.count({"user":user}) == 0):
@@ -37,11 +42,16 @@ def lineMapper(points,length,user):
     coordinates_map["point_x"] = p2_x
     coordinates_map["point_y"] = p2_y
     insert_point = coll_coordinates.insert_one(coordinates_map)
-    # fo = open("draw_command.js", "a")
-    # fo.write("drawLine("+str(Coordinates_Points_Map[p1]['x'])+","+str(Coordinates_Points_Map[p1]['y'])+","+str(Coordinates_Points_Map[p2]['x'])+","+str(Coordinates_Points_Map[p2]['y'])+");");
-    # fo.write("drawText(\'"+str(p1)+"\',"+str(Coordinates_Points_Map[p1]['x'])+","+str(Coordinates_Points_Map[p1]['y'])+");")
-    # fo.write("drawText(\'"+str(p2)+"\',"+str(Coordinates_Points_Map[p2]['x'])+","+str(Coordinates_Points_Map[p2]['y'])+");")
-    # fo.close()
-    cursor = coll_coordinates.find({"user":user})
+    lines_map["point_1"] = p1
+    lines_map["point_2"] = p2
+    lines_map["length"] = length
+    insert_line = coll_lines.insert_one(lines_map)
+
+    fo = open("drawing_module/draw_command.js", "a")
+    fo.write("drawLine("+str(p1_x)+","+str(p1_y)+","+str(p2_x)+","+str(p2_y)+");");
+    fo.write("drawText(\'"+str(p1)+"\',"+str(p1_x)+","+str(p1_y)+");")
+    fo.write("drawText(\'"+str(p2)+"\',"+str(p2_x)+","+str(p2_y)+");")
+    fo.close()
+    cursor = coll_lines.find({"user":user})
     for document in cursor: 
         pprint(document)

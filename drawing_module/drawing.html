@@ -21,7 +21,7 @@ function drawLine(px1,py1,px2,py2){
 	ctx.stroke();
 }
 function drawText(text,px,py){
-	ctx.font = "6px Arial";
+	ctx.font = "4px Arial";
 	ctx.fillStyle = "red";
 	ctx.fillText(text,50+px,50+py);
 }
@@ -32,7 +32,7 @@ function drawArc(px,py,radius){
 }
 function drawCircle(px,py,radius){
 	ctx.beginPath();
-	ctx.arc(px,py,radius,0,2*Math.PI);
+	ctx.arc(50+px,50+py,radius,0,2*Math.PI);
 	ctx.stroke();
 }
 
