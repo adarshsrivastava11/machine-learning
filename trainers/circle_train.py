@@ -8,53 +8,11 @@ import datetime
 stemmer = LancasterStemmer()
 # 3 classes of training data
 training_data = []
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius with $center as center"})
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"With $center as center draw a circle with radius $radius"})
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Construct a circle of radius $radius whose center is $center"})
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius and center $center"})
-training_data.append({"class":"Circle, center: $center, radius: $diameter/2 cm", "sentence":"Draw a circle of diameter $diameter and center $center"})
-training_data.append({"class":"Circle, center: $center, radius: $diameter/2 cm", "sentence":"Construct a circle of diameter $dimater whose center is $center"})
-training_data.append({"class":"Circle, center: $center, radius: $diameter/2 cm", "sentence":"Draw a circle of diameter $diameter with $center as center"})
-for a in range(ord('A'),ord('Z')):
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius and center "+chr(a)})
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius with "+chr(a)+" as center"})
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"With "+chr(a)+" as center draw a circle with radius $radius"})
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Construct a circle of radius $radius whose center is "+chr(a)})
 
-# training_data.append({"class":"Line ,parent_line: $point_pair2, child_line: $point_pair1, length: 2*$length1 cm", "sentence":"Draw a line $point_pair1 such that it's length is twice of line $point_pair2"})
-# training_data.append({"class":"Line ,parent_line: $point_pair2, child_line: $point_pair1, length: 2*$length1 cm", "sentence":"Draw a line $point_pair1 such that it's length is twice of $point_pair2"})
-
-# training_data.append({"class":"Line, parent_line: $point_pair2, child_line: $point_pair1, length: 3*$length1 cm", "sentence":"Draw a line $point_pair1 such that it's length is thrice of line $point_pair2"})
-# training_data.append({"class":"Line, parent_line: $point_pair2, child_line: $point_pair1, length: 3*$length1 cm", "sentence":"Draw a line $point_pair1 such that it's length is thrice of $point_pair2"})
-
-# training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Bisect line $point_pair"})
-# training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Divide line AB in two parts"})
-# training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a bisector of line $point_pair"})
-# training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a perpindicular bisector of $point_pair"})
-# training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Divide the line $point_pair in two parts"})
-# training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Cut the line $point_pair in two equal halves"})
-# for a in range(ord('A'),ord('D')):
-#     for b in range(a,ord('G')):
-#         training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Bisect line "+chr(a)+chr(b)})
-#         training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a bisector of line "+chr(a)+chr(b)})
-#         training_data.append({"class":"Bisect, line: $point_pair", "sentence":"Draw a perpindicular bisector of "+chr(a)+chr(b)})
-#         training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular to "+chr(a)+chr(b)})
-#         training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular of "+chr(a)+chr(b)})
-#         training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Construct a perpindicular of "+chr(a)+chr(b)})
-#         training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Join the point "+chr(a)+" and "+chr(b)})
-#         training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Connect the point "+chr(a)+" and "+chr(b)})
-        
-       
-
-# training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular to $point_pair"})
-# training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Draw a perpindicular of $point_pair"})
-# training_data.append({"class":"Perpendicular, line: $point_pair", "sentence":"Construct a perpindicular of $point_pair"})
-
-# training_data.append({"class":"Join, points: $point_pair", "sentence":"Join $point_pair"})
-# training_data.append({"class":"Join, points: $point_pair", "sentence":"Connect $point_pair"})
-
-# training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Join the point $point1 and $point2"})
-# training_data.append({"class":"Join, points: $point1+$point2", "sentence":"Connect the point $point1 and $point2"})
+with open('../training_data/circle.dat') as f:
+    for lines in f:
+        class_defined,sentence = lines.split('#')
+        training_data.append({"class":class_defined,"sentence":sentence})
 print ("%s sentences in training data" % len(training_data))
 words = []
 classes = []
@@ -221,7 +179,7 @@ def train(X, y, hidden_neurons=30, alpha=1, epochs=50000, dropout=False, dropout
                'words': words,
                'classes': classes
               }
-    synapse_file = "synapses_circle.json"
+    synapse_file = "../training_result/synapses_circle.json"
 
     with open(synapse_file, 'w') as outfile:
         json.dump(synapse, outfile, indent=4, sort_keys=True)
@@ -238,7 +196,7 @@ print ("processing time:", elapsed_time, "seconds")
 # probability threshold
 ERROR_THRESHOLD = 0.2
 # load our calculated synapse values
-synapse_file = 'synapses_circle.json' 
+synapse_file = '../training_result/synapses_circle.json' 
 with open(synapse_file) as data_file: 
     synapse = json.load(data_file) 
     synapse_0 = np.asarray(synapse['synapse0']) 
