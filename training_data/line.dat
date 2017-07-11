@@ -1,0 +1,117 @@
+Line, line: $point_pair, length: $length cm#Draw a line $point_pair of length $length cm
+Line, line: $point_pair, length: $length cm#Construct a line $point_pair of length $length cm
+Line, line: $point_pair, length: $length cm#Draw a line segment $point_pair of length $length cm
+Line, line: $point_pair, length: $length cm#Draw $point_pair length equals $length cm
+Line ,parent_line: $point_pair2, child_line: $point_pair1, length: 2*$length1 cm#Draw a line $point_pair1 such that it's length is twice of line $point_pair2
+Line ,parent_line: $point_pair2, child_line: $point_pair1, length: 2*$length1 cm#Draw a line $point_pair1 such that it's length is twice of $point_pair2
+Line, parent_line: $point_pair2, child_line: $point_pair1, length: 3*$length1 cm#Draw a line $point_pair1 such that it's length is thrice of line $point_pair2
+Line, parent_line: $point_pair2, child_line: $point_pair1, length: 3*$length1 cm#Draw a line $point_pair1 such that it's length is thrice of $point_pair2
+Bisect, line: $point_pair#Bisect line $point_pair
+Bisect, line: $point_pair#Divide line AB in two parts
+Bisect, line: $point_pair#Draw a bisector of line $point_pair
+Bisect, line: $point_pair#Draw a perpendicular bisector of $point_pair
+Bisect, line: $point_pair#Divide the line $point_pair in two parts
+Bisect, line: $point_pair#Cut the line $point_pair in two equal halves
+Perpendicular, line: $point_pair#Draw a perpendicular to $point_pair
+Perpendicular, line: $point_pair#Draw a perpendicular of $point_pair
+Perpendicular, line: $point_pair#Construct a perpendicular of $point_pair
+Join, points: $point_pair#Join $point_pair
+Join, points: $point_pair#Connect $point_pair
+Join, points: $point1+$point2#Join the point $point1 and $point2
+Join, points: $point1+$point2#Connect the point $point1 and $point2
+Bisect, line: $point_pair#Bisect line AB
+Bisect, line: $point_pair#Draw a bisector of line AB
+Bisect, line: $point_pair#Draw a perpendicular bisector of AB
+Perpendicular, line: $point_pair#Draw a perpendicular to AB
+Perpendicular, line: $point_pair#Draw a perpendicular of AB
+Perpendicular, line: $point_pair#Construct a perpendicular of AB
+Join, points: $point1+$point2#Join the point A and B
+Join, points: $point1+$point2#Connect the point A and B
+Bisect, line: $point_pair#Bisect line AC
+Bisect, line: $point_pair#Draw a bisector of line AC
+Bisect, line: $point_pair#Draw a perpendicular bisector of AC
+Perpendicular, line: $point_pair#Draw a perpendicular to AC
+Perpendicular, line: $point_pair#Draw a perpendicular of AC
+Perpendicular, line: $point_pair#Construct a perpendicular of AC
+Join, points: $point1+$point2#Join the point A and C
+Join, points: $point1+$point2#Connect the point A and C
+Bisect, line: $point_pair#Bisect line AD
+Bisect, line: $point_pair#Draw a bisector of line AD
+Bisect, line: $point_pair#Draw a perpendicular bisector of AD
+Perpendicular, line: $point_pair#Draw a perpendicular to AD
+Perpendicular, line: $point_pair#Draw a perpendicular of AD
+Perpendicular, line: $point_pair#Construct a perpendicular of AD
+Join, points: $point1+$point2#Join the point A and D
+Join, points: $point1+$point2#Connect the point A and D
+Bisect, line: $point_pair#Bisect line AE
+Bisect, line: $point_pair#Draw a bisector of line AE
+Bisect, line: $point_pair#Draw a perpendicular bisector of AE
+Perpendicular, line: $point_pair#Draw a perpendicular to AE
+Perpendicular, line: $point_pair#Draw a perpendicular of AE
+Perpendicular, line: $point_pair#Construct a perpendicular of AE
+Join, points: $point1+$point2#Join the point A and E
+Join, points: $point1+$point2#Connect the point A and E
+Bisect, line: $point_pair#Bisect line AF
+Bisect, line: $point_pair#Draw a bisector of line AF
+Bisect, line: $point_pair#Draw a perpendicular bisector of AF
+Perpendicular, line: $point_pair#Draw a perpendicular to AF
+Perpendicular, line: $point_pair#Draw a perpendicular of AF
+Perpendicular, line: $point_pair#Construct a perpendicular of AF
+Join, points: $point1+$point2#Join the point A and F
+Join, points: $point1+$point2#Connect the point A and F
+Bisect, line: $point_pair#Bisect line BC
+Bisect, line: $point_pair#Draw a bisector of line BC
+Bisect, line: $point_pair#Draw a perpendicular bisector of BC
+Perpendicular, line: $point_pair#Draw a perpendicular to BC
+Perpendicular, line: $point_pair#Draw a perpendicular of BC
+Perpendicular, line: $point_pair#Construct a perpendicular of BC
+Join, points: $point1+$point2#Join the point B and C
+Join, points: $point1+$point2#Connect the point B and C
+Bisect, line: $point_pair#Bisect line BD
+Bisect, line: $point_pair#Draw a bisector of line BD
+Bisect, line: $point_pair#Draw a perpendicular bisector of BD
+Perpendicular, line: $point_pair#Draw a perpendicular to BD
+Perpendicular, line: $point_pair#Draw a perpendicular of BD
+Perpendicular, line: $point_pair#Construct a perpendicular of BD
+Join, points: $point1+$point2#Join the point B and D
+Join, points: $point1+$point2#Connect the point B and D
+Bisect, line: $point_pair#Bisect line BE
+Bisect, line: $point_pair#Draw a bisector of line BE
+Bisect, line: $point_pair#Draw a perpendicular bisector of BE
+Perpendicular, line: $point_pair#Draw a perpendicular to BE
+Perpendicular, line: $point_pair#Draw a perpendicular of BE
+Perpendicular, line: $point_pair#Construct a perpendicular of BE
+Join, points: $point1+$point2#Join the point B and E
+Join, points: $point1+$point2#Connect the point B and E
+Bisect, line: $point_pair#Bisect line BF
+Bisect, line: $point_pair#Draw a bisector of line BF
+Bisect, line: $point_pair#Draw a perpendicular bisector of BF
+Perpendicular, line: $point_pair#Draw a perpendicular to BF
+Perpendicular, line: $point_pair#Draw a perpendicular of BF
+Perpendicular, line: $point_pair#Construct a perpendicular of BF
+Join, points: $point1+$point2#Join the point B and F
+Join, points: $point1+$point2#Connect the point B and F
+Bisect, line: $point_pair#Bisect line CD
+Bisect, line: $point_pair#Draw a bisector of line CD
+Bisect, line: $point_pair#Draw a perpendicular bisector of CD
+Perpendicular, line: $point_pair#Draw a perpendicular to CD
+Perpendicular, line: $point_pair#Draw a perpendicular of CD
+Perpendicular, line: $point_pair#Construct a perpendicular of CD
+Join, points: $point1+$point2#Join the point C and D
+Join, points: $point1+$point2#Connect the point C and D
+Bisect, line: $point_pair#Bisect line CE
+Bisect, line: $point_pair#Draw a bisector of line CE
+Bisect, line: $point_pair#Draw a perpendicular bisector of CE
+Perpendicular, line: $point_pair#Draw a perpendicular to CE
+Perpendicular, line: $point_pair#Draw a perpendicular of CE
+Perpendicular, line: $point_pair#Construct a perpendicular of CE
+Join, points: $point1+$point2#Join the point C and E
+Join, points: $point1+$point2#Connect the point C and E
+Bisect, line: $point_pair#Bisect line CF
+Bisect, line: $point_pair#Draw a bisector of line CF
+Bisect, line: $point_pair#Draw a perpendicular bisector of CF
+Perpendicular, line: $point_pair#Draw a perpendicular to CF
+Perpendicular, line: $point_pair#Draw a perpendicular of CF
+Perpendicular, line: $point_pair#Construct a perpendicular of CF
+Join, points: $point1+$point2#Join the point C and F
+Join, points: $point1+$point2#Connect the point C and F

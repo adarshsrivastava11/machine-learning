@@ -18,17 +18,12 @@ sock_geo_mapper.connect("tcp://127.0.0.1:"+client_port)
 sock_line.connect("tcp://127.0.0.1:"+line_server_port)
 sock_circle.connect("tcp://127.0.0.1:"+circle_server_port)
 
+
 units = ["cm","mm","km","is","an","us","kg","of","at"]
 
 def line_info(input_sentence,max_output_line):
     length = re.findall("\d+\.\d+", input_sentence) 
     points = re.findall("[A-Z][A-Z]", input_sentence)
-    # digits_removed = ''.join([i for i in input_sentence if not i.isdigit()])
-    # digits_removed = digits_removed.split(' ')
-    # for points_pairs in digits_removed:
-    #     if len(points_pairs) == 2:
-    #         if points_pairs not in units:
-    #             points_pairs1 = ''.join(points_pairs)
     length = ''.join(length)
     points = ''.join(points)
     max_output_line = eval(max_output_line)
@@ -45,15 +40,22 @@ def line_info(input_sentence,max_output_line):
     return processed_string
 
 def circle_info(input_sentence,max_output_circle):
-    print max_output_circle
-    radius = re.findall("\d+\.\d+", input_sentence) 
-    center = re.findall(" [A-Z]", input_sentence) or re.findall("[A-Z] ", input_sentence)
-    radius = ''.join(radius)
+    length_factor = re.findall("\d+\.\d+", input_sentence) 
+    center = re.findall(" [A-Z]", input_sentence) or re.findall("[A-Z] ", input_sentence) or re.findall(" [a-z]", input_sentence) or re.findall("[a-z] ", input_sentence) 
+    length_factor = ''.join(length_factor)
     center = ''.join(center)
     center = center.strip()
+    radius = 0.0
     max_output_circle = eval(max_output_circle)
     raw_string = max_output_circle["sentence"]
-    processed_string = raw_string.replace("$radius",radius)
+    if "$radius" in raw_string:
+        radius = length_factor
+        processed_string = raw_string.replace("$radius",length_factor)
+    elif "$diameter" in raw_string:
+        print "Found Diameter"
+        radius = float(length_factor)/2
+        processed_string = raw_string.replace("$diameter",length_factor)
+   
     processed_string = processed_string.replace("$center",center)
     command = processed_string.split(',')[0]
     processed_dict = {
@@ -69,18 +71,21 @@ prob = []
 while True:
 
     input_sentence = raw_input()
-    sock_line.send(input_sentence)
 
+    sock_line.send(input_sentence)
     max_output_line = sock_line.recv()
     max_output_line = eval(max_output_line)
     prob_line = float(max_output_line["prob"])
     prob.append(prob_line)
+    print prob
+
     sock_circle.send(input_sentence)
     max_output_circle = sock_circle.recv()
     max_output_circle = eval(max_output_circle)
     prob_circle = float(max_output_circle["prob"])
     prob.append(prob_circle)
     print prob
+
     maximum = 0.0
     index = 0
     for i in range(0,len(prob)):

@@ -13,7 +13,10 @@ def circleMapper(center,radius,user):
         "user":user,
         "time_added":datetime.now(),
     }
-    center = center[0].upper()
+    try:
+        center = center[0]
+    except IndexError:
+        center = 'A'
     if (coll_coordinates.count({"user":user}) == 0):
         coordinates_map = {
             "user" : user,
@@ -29,6 +32,8 @@ def circleMapper(center,radius,user):
     get_point = coll_coordinates.find_one({"point_name" : center,"user" : user})
     p1_x = get_point.get('point_x')
     p1_y = get_point.get('point_y')
+    print p1_x
+    print p1_y
     circles_map["center"] = center
     circles_map["radius"] = radius
     insert_circle = coll_circles.insert_one(circles_map)

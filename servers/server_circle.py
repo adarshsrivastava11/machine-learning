@@ -16,20 +16,10 @@ sock.bind("tcp://127.0.0.1:5002")
 stemmer = LancasterStemmer()
 # 3 classes of training data
 training_data = []
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius with $center as center"})
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"With $center as center draw a circle with radius $radius"})
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Construct a circle of radius $radius whose center is $center"})
-training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius and center $center"})
-training_data.append({"class":"Circle, center: $center, radius: $diameter/2 cm", "sentence":"Draw a circle of diameter $diameter and center $center"})
-training_data.append({"class":"Circle, center: $center, radius: $diameter/2 cm", "sentence":"Construct a circle of diameter $dimater whose center is $center"})
-training_data.append({"class":"Circle, center: $center, radius: $diameter/2 cm", "sentence":"Draw a circle of diameter $diameter with $center as center"})
-for a in range(ord('A'),ord('Z')):
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius and center "+chr(a)})
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Draw a circle of radius $radius with "+chr(a)+" as center"})
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"With "+chr(a)+" as center draw a circle with radius $radius"})
-    training_data.append({"class":"Circle, center: $center, radius: $radius cm", "sentence":"Construct a circle of radius $radius whose center is "+chr(a)})
-
-
+with open('training_data/circle.dat') as f:
+    for lines in f:
+        class_defined,sentence = lines.split('#')
+        training_data.append({"class":class_defined,"sentence":sentence})
 
 words = []
 classes = []

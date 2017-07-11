@@ -8,6 +8,7 @@ from pprint import pprint
 from mappers.line_mapper import *
 from mappers.bisector_mapper import *
 from mappers.circle_mapper import *
+from mappers.perpendicular_mapper import *
 import ConfigParser
 
 config = ConfigParser.RawConfigParser()  
@@ -39,7 +40,10 @@ while True:
         lineMapper(point_pair,length,username)
     if command == "Bisect":
         point_pair = input_sentence["end_points"]
-        bisectorMapper(point_pair,50,username)
+        bisectorMapper(point_pair,30,username)
+    if command == "Perpendicular":
+        point_pair = input_sentence["end_points"]
+        perpendicularMapper(point_pair,30,username) 
     if command == "Circle":
         center = input_sentence["center"]
         radius = input_sentence["radius"]

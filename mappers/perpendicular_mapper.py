@@ -6,7 +6,7 @@ db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
 coll_coordinates.drop()
-def bisectorMapper(points,length,user):
+def perpendicularMapper(points,length,user):
     if not length:
         length = ['50']
     p1 = points[0].upper()
@@ -31,6 +31,8 @@ def bisectorMapper(points,length,user):
         coordinates_map["point_y"] = pb_y
         insert_point = coll_coordinates.insert_one(coordinates_map)
         fo = open("drawing_module/draw_command.js", "a")
+        fo.write("drawLine("+str(pb_x)+","+str(pb_y)+","+str(pb_x)+","+str(pb_y+length)+");");
+        fo.write("drawLine("+str(pb_x)+","+str(pb_y)+","+str(pb_x)+","+str(pb_y-length)+");");
         fo.write("drawText(\'"+str(bisector_point)+"\',"+str(pb_x)+","+str(pb_y)+");")
         fo.close()
     except KeyError:

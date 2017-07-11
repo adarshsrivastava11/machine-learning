@@ -1,0 +1,1 @@
+drawLine(0.0,0.0,10.0,0.0);drawText('A',0.0,0.0);drawText('B',10.0,0.0);drawCircle(10.0,0.0,10.00);drawText('B',10.0,0.0);
