@@ -9,6 +9,8 @@ from mappers.line_mapper import *
 from mappers.bisector_mapper import *
 from mappers.circle_mapper import *
 from mappers.perpendicular_mapper import *
+from mappers.join_mapper import *
+from mappers.mark_mapper import *
 import ConfigParser
 
 config = ConfigParser.RawConfigParser()  
@@ -48,3 +50,12 @@ while True:
         center = input_sentence["center"]
         radius = input_sentence["radius"]
         circleMapper(center,radius,username)
+    if command == "Join":
+        first_point = input_sentence["first_point"]
+        second_point = input_sentence["second_point"]
+        joinMapper(first_point,second_point,username)
+    if command == "Mark":
+        point_name = input_sentence["point_name"]
+        point_x = input_sentence["point_x"]
+        point_y = input_sentence["point_y"]
+        markMapper(point_name,point_x,point_y,username)

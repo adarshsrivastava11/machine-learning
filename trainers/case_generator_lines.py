@@ -1,11 +1,4 @@
-for a in range(ord('A'),ord('D')):
-    for b in range(a,ord('G')):
-    	if(chr(a) != chr(b)):
-    		print("Bisect, line: $point_pair#Bisect line "+chr(a)+chr(b))
-	        print("Bisect, line: $point_pair#Draw a bisector of line "+chr(a)+chr(b))
-	        print("Bisect, line: $point_pair#Draw a perpendicular bisector of "+chr(a)+chr(b))
-	        print("Perpendicular, line: $point_pair#Draw a perpendicular to "+chr(a)+chr(b))
-	        print("Perpendicular, line: $point_pair#Draw a perpendicular of "+chr(a)+chr(b))
-	        print("Perpendicular, line: $point_pair#Construct a perpendicular of "+chr(a)+chr(b))
-	        print("Join, points: $point1+$point2#Join the point "+chr(a)+" and "+chr(b))
-	        print("Join, points: $point1+$point2#Connect the point "+chr(a)+" and "+chr(b))
+from random import randint
+for a in range(ord('A'),ord('Z')):
+	print("Mark, point: $point, x: $X, y: $Y#Mark a point "+chr(a)+" at "+str(randint(0,10))+"."+str(randint(10,99))+","+str(randint(0,10))+"."+str(randint(10,99)))
+	print("Mark, point: $point, x: $X, y: $Y#Mark a point "+chr(a)+" on "+str(randint(0,10))+"."+str(randint(10,99))+","+str(randint(0,10))+"."+str(randint(10,99)))
