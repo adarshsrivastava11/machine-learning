@@ -150,8 +150,13 @@ def classify(sentence, show_details=False):
                 max = return_results[i][1]
                 max_index = i
     results = []
-    results.append(return_results[max_index][0])
-    results.append(return_results[max_index][1])
+    print return_results
+    if not return_results:
+        results.append("Circle")
+        results.append(0.0)
+    else:
+        results.append(return_results[max_index][0])
+        results.append(return_results[max_index][1])
     return results
 
 while True:

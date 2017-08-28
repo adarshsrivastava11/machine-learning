@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
+<script>
+var drawing_commands = "";
+$(document).ready(function(){
+    $("#send_command").click(function(){
+    	command = $("#new_command").val();
+    	data = {
+    		"command" : command,
+    	}
+        $.ajax({
+        	url : "http://localhost:8000/api/command/addy",
+        	type : "POST",
+        	data : data,
+        	// headers: {
+         //      'Content-Type': 'application/json',
+         //    },
+        	success : function(data){
+        		draw_command();
+        	},
+        	error : function(err){
+        		alert(err);
+        	}
+        });
+    });
+});
+function draw_command(){
+	$.ajax({
+    	url : "http://localhost:8000/api/output/addy",
+    	type : "GET",
+    	success : function(data){
+    		drawing_commands = drawing_commands+data;
+    		eval(drawing_commands);
+    	},
+    	error : function(err){
+    		alert(err);
+    	}
+    });
+}
+</script>
+</head>
+<body>
+ <canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.
+ </canvas>
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.scale(4,4);
+function drawLine(px1,py1,px2,py2){
+  ctx.moveTo(50+px1,50+py1);
+  ctx.lineTo(50+px2,50+py2);
+  
+  ctx.stroke();
+}
+function drawText(text,px,py){
+  ctx.font = "5px Arial";
+  ctx.fillStyle = "red";
+  ctx.fillText(text,50+px,48+py);
+}
+function drawArc(px,py,radius){
+  ctx.beginPath();
+  ctx.arc(px,py,radius);
+  ctx.stroke();
+}
+function drawCircle(px,py,radius){
+  ctx.beginPath();
+  ctx.arc(50+px,50+py,radius,0,2*Math.PI);
+  ctx.stroke();
+}
+</script>
+<button id="send_command">Send</button>
+<input type="text" id="new_command">
+
+</body>
+</html>
+

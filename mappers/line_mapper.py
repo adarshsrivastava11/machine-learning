@@ -6,7 +6,8 @@ client = MongoClient()
 db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
-
+db2 = client['commands']
+draw_commands = db2['draw_commands']
 
 def lineMapper(points,length,user):
 
@@ -47,11 +48,20 @@ def lineMapper(points,length,user):
     lines_map["length"] = length
     insert_line = coll_lines.insert_one(lines_map)
 
-    fo = open("drawing_module/draw_command.js", "a")
-    fo.write("drawLine("+str(p1_x)+","+str(p1_y)+","+str(p2_x)+","+str(p2_y)+");");
-    fo.write("drawText(\'"+str(p1)+"\',"+str(p1_x)+","+str(p1_y)+");")
-    fo.write("drawText(\'"+str(p2)+"\',"+str(p2_x)+","+str(p2_y)+");")
-    fo.close()
+    # fo = open("application_server/backend/frontend/tt.js", "a")
+    # print fo
+    # fo.write("drawLine("+str(p1_x)+","+str(p1_y)+","+str(p2_x)+","+str(p2_y)+");");
+    # fo.write("drawText(\'"+str(p1)+"\',"+str(p1_x)+","+str(p1_y)+");")
+    # fo.write("drawText(\'"+str(p2)+"\',"+str(p2_x)+","+str(p2_y)+");")
+    # fo.close()
+    command = "drawLine("+str(p1_x)+","+str(p1_y)+","+str(p2_x)+","+str(p2_y)+");"+"drawText(\'"+str(p1)+"\',"+str(p1_x)+","+str(p1_y)+");"+"drawText(\'"+str(p2)+"\',"+str(p2_x)+","+str(p2_y)+");"
+    draw_coommand_dict = {
+        "username" : user,
+        "command" : command,
+        "executed" : False,
+        "time_added" : datetime.now(),
+    }
+    insert_command = draw_commands.insert_one(draw_coommand_dict)
     cursor = coll_lines.find({"user":user})
     for document in cursor: 
         pprint(document)

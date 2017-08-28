@@ -6,7 +6,8 @@ client = MongoClient()
 db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
-
+db2 = client['commands']
+draw_commands = db2['draw_commands']
 def markMapper(point_name,point_x,point_y,user):
 	coordinates_map = {
 		"user" : user,
@@ -19,10 +20,18 @@ def markMapper(point_name,point_x,point_y,user):
 	coordinates_map["point_y"] = point_y
 	insert_point = coll_coordinates.insert_one(coordinates_map)
 
-	fo = open("drawing_module/draw_command.js", "a")
-	fo.write("drawText(\'"+str(point_name)+"\',"+str(point_x)+","+str(point_y)+");")
-	fo.close()
+	# fo = open("application-backend/app/assets/js/draw_command"+"_"+user+".js", "a")
+	# fo.write("drawText(\'"+str(point_name)+"\',"+str(point_x)+","+str(point_y)+");")
+	# fo.close()
+	command = "drawText(\'"+str(point_name)+"\',"+str(point_x)+","+str(point_y)+");"
+	draw_coommand_dict = {
+        "username" : user,
+        "command" : command,
+        "executed" : False,
+        "time_added" : datetime.now(),
+    }
 
+	insert_command = draw_commands.insert_one(draw_coommand_dict)
 	cursor = coll_lines.find({"user":user})
 	for document in cursor: 
 		pprint(document)

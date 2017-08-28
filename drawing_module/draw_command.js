@@ -1,1 +1,1 @@
-drawLine(0.0,0.0,10.0,0.0);drawText('A',0.0,0.0);drawText('B',10.0,0.0);drawText('C',20.00,0.00);drawLine(10.0,0.0,20.00,0.00);drawLine(0.0,0.0,10.0,0.0);drawText('A',0.0,0.0);drawText('B',10.0,0.0);drawCircle(10.0,0.0,10.00);drawText('B',10.0,0.0);drawText('P',5.00,5.00);drawText('a',5.0,0.0);drawLine(5.00,5.00,10.0,0.0);
+drawLine(0.0,0.0,10.0,0.0);drawText('A',0.0,0.0);drawText('B',10.0,0.0);

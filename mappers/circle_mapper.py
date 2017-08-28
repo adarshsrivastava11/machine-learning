@@ -7,6 +7,8 @@ db = client['geometry']
 coll_coordinates = db['coordinates']
 coll_lines = db['lines']
 coll_circles = db['circles']
+db2 = client['commands']
+draw_commands = db2['draw_commands']
 
 def circleMapper(center,radius,user):
     circles_map = {
@@ -37,10 +39,18 @@ def circleMapper(center,radius,user):
     circles_map["center"] = center
     circles_map["radius"] = radius
     insert_circle = coll_circles.insert_one(circles_map)
-    fo = open("drawing_module/draw_command.js", "a")
-    fo.write("drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");");
-    fo.write("drawText(\'"+str(center)+"\',"+str(p1_x)+","+str(p1_y)+");")
-    fo.close()
+    # fo = open("application-backend/app/assets/js/draw_command"+"_"+user+".js", "a")
+    # fo.write("drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");")
+    # fo.write("drawText(\'"+str(center)+"\',"+str(p1_x)+","+str(p1_y)+");")
+    # fo.close()
+    command = "drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");"+"drawText(\'"+str(center)+"\',"+str(p1_x)+","+str(p1_y)+");"
+    draw_coommand_dict = {
+        "username" : user,
+        "command" : command,
+        "executed" : False,
+        "time_added" : datetime.now(),
+    }
+    insert_command = draw_commands.insert_one(draw_coommand_dict)
     cursor = coll_coordinates.find({"user":user})
     for document in cursor: 
         pprint(document)

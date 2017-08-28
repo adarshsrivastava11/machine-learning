@@ -1,7 +1,7 @@
 import re
 def circle_info(input_sentence,max_output_circle):
     length_factor = re.findall("\d+\.\d+", input_sentence) 
-    center = re.findall("(?!Draw)([A-Z])", input_sentence) or re.findall("[a-z]", input_sentence)
+    center = re.findall("(?!Draw|With|Taking|Radius)([A-Z])", input_sentence) or re.findall("[a-z]", input_sentence)
     length_factor = ''.join(length_factor)
     center = ''.join(center)
     center = center.strip()
