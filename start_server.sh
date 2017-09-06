@@ -5,3 +5,4 @@ python connector-devices/client_geomapper.py &
 #mongod &
 python client.py addy &
 python geo_mapper.py addy &
+python server_backend/manage.py runserver &
