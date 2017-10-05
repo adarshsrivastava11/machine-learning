@@ -12,7 +12,7 @@ $(document).ready(function(){
     		"command" : command,
     	}
         $.ajax({
-        	url : "http://localhost:8000/api/command/addy",
+        	url : "http://karkare1.cse.iitk.ac.in:8080/api/command/addy",
         	type : "POST",
         	data : data,
         	// headers: {
@@ -29,7 +29,7 @@ $(document).ready(function(){
 });
 function draw_command(){
 	$.ajax({
-    	url : "http://localhost:8000/api/output/addy",
+    	url : "http://karkare1.cse.iitk.ac.in:8080/api/output/addy",
     	type : "GET",
     	success : function(data){
     		drawing_commands = drawing_commands+data;
@@ -43,7 +43,7 @@ function draw_command(){
 </script>
 </head>
 <body>
- <canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+ <canvas id="myCanvas" width="1000" height="500" style="border:1px solid #d3d3d3;">
     Your browser does not support the HTML5 canvas tag.
  </canvas>
 <script>
@@ -73,9 +73,9 @@ function drawCircle(px,py,radius){
   ctx.stroke();
 }
 </script>
-<button id="send_command">Send</button>
-<input type="text" id="new_command">
-
+<br>
+<input type="text" id="new_command" placeholder="Draw a line AB of length 10.00 cm">
+<button id="send_command">Draw</button>
 </body>
 </html>
 

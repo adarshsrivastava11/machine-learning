@@ -40,6 +40,10 @@ while True:
         point_pair = input_sentence["end_points"]
         length = input_sentence["length"]
         lineMapper(point_pair,length,username)
+    if command == "Cut":
+        point_pair = input_sentence["end_points"]
+        length = input_sentence["length"]
+        lineMapper(point_pair,length,username)
     if command == "Bisect":
         point_pair = input_sentence["end_points"]
         bisectorMapper(point_pair,30,username)

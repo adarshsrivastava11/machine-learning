@@ -1,0 +1,6 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+drawArc	/home/adarshs/machine-learning/server_backend/backend/templates/drawing.html	/^function drawArc(px,py,radius){$/;"	f	language:HTML
+drawCircle	/home/adarshs/machine-learning/server_backend/backend/templates/drawing.html	/^function drawCircle(px,py,radius){$/;"	f	language:HTML
+drawLine	/home/adarshs/machine-learning/server_backend/backend/templates/drawing.html	/^function drawLine(px1,py1,px2,py2){$/;"	f	language:HTML
+drawText	/home/adarshs/machine-learning/server_backend/backend/templates/drawing.html	/^function drawText(text,px,py){$/;"	f	language:HTML
+draw_command	/home/adarshs/machine-learning/server_backend/backend/templates/drawing.html	/^function draw_command(){$/;"	f	language:HTML
