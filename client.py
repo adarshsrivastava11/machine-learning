@@ -55,8 +55,8 @@ while True:
         prob.append(prob_circle)
         print prob
 
-        maximum = 0.0
-        index = 0
+        maximum = 0.7
+        index = -1
         for i in range(0,len(prob)):
             if prob[i] >= maximum:
                 maximum = prob[i]
@@ -70,6 +70,8 @@ while True:
             processed_dict_circle = circle_info(input_sentence,str(max_output_circle))
             sock_geo_mapper.send("%s@%s" % (username, str(processed_dict_circle)))
             print processed_dict_circle
+        if (index == -1):
+            print "Unknown Input can execute - "+input_sentence
             
        
        

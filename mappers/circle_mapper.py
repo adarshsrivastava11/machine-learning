@@ -30,27 +30,32 @@ def circleMapper(center,radius,user):
         coordinates_map["point_y"] = 0.0
         insert_point = coll_coordinates.insert_one(coordinates_map)
 
-    
-    get_point = coll_coordinates.find_one({"point_name" : center,"user" : user})
-    p1_x = get_point.get('point_x')
-    p1_y = get_point.get('point_y')
-    print p1_x
-    print p1_y
-    circles_map["center"] = center
-    circles_map["radius"] = radius
-    insert_circle = coll_circles.insert_one(circles_map)
+    try:
+        get_point = coll_coordinates.find_one({"point_name" : center,"user" : user})
+        p1_x = get_point.get('point_x')
+        p1_y = get_point.get('point_y')
+        print p1_x
+        print p1_y
+        circles_map["center"] = center
+        circles_map["radius"] = radius
+        insert_circle = coll_circles.insert_one(circles_map)
     # fo = open("application-backend/app/assets/js/draw_command"+"_"+user+".js", "a")
     # fo.write("drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");")
     # fo.write("drawText(\'"+str(center)+"\',"+str(p1_x)+","+str(p1_y)+");")
     # fo.close()
-    command = "drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");"+"drawText(\'"+str(center)+"\',"+str(p1_x)+","+str(p1_y)+");"
-    draw_coommand_dict = {
-        "username" : user,
-        "command" : command,
-        "executed" : False,
-        "time_added" : datetime.now(),
-    }
-    insert_command = draw_commands.insert_one(draw_coommand_dict)
-    cursor = coll_coordinates.find({"user":user})
-    for document in cursor: 
-        pprint(document)
+   
+
+        command = "drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");"+"drawText(\'"+str(center)+"\',"+str(p1_x)+","+str(p1_y)+");"
+        draw_coommand_dict = {
+            "username" : user,
+            "command" : command,
+            "executed" : False,
+            "time_added" : datetime.now(),
+        }
+        insert_command = draw_commands.insert_one(draw_coommand_dict)
+        cursor = coll_coordinates.find({"user":user})
+        for document in cursor: 
+            pprint(document)
+            
+    except AttributeError:
+        print "Don't understand what you mean"
