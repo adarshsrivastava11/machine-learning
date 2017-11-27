@@ -17,6 +17,10 @@ def line_info(input_sentence,max_output_line):
         points = re.findall("[A-Z][A-Z]", input_sentence)
         length = ''.join(length)
         points = ''.join(points)
+        if (length == ''):
+            length = '10'
+        if (points == ''):
+            points = "AB"
         max_output_line = eval(max_output_line)
         raw_string = max_output_line["sentence"]
         processed_string = raw_string.replace("$length",length)
