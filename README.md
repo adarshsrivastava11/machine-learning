@@ -16,7 +16,7 @@ http://zeromq.org/intro:get-the-software
 http://api.mongodb.com/python/current/installation.html
 ### Installing NLTK - 
 https://www.nltk.org/install.html
-## How to trial run - 
+### Starting the Server and the Web App - 
 ```
 1. bash start_server.sh
 ```
