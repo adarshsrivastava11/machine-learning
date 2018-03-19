@@ -33,12 +33,13 @@ sock_circle.connect("tcp://127.0.0.1:"+circle_server_port)
 units = ["cm","mm","km","is","an","us","kg","of","at"]
 
 
-
+print "Client Started"
 prob = []
 print "[Line,Circle]"
 while True:
     get_commands = commands.find_one_and_delete({"username": username})
     if get_commands is not None:
+        print get_commands
         input_sentence = str(get_commands["command"])
         if str(get_commands["command"]) == "exit":
             sys.exit()

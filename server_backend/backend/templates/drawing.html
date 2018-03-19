@@ -12,7 +12,7 @@ $(document).ready(function(){
     		"command" : command,
     	}
         $.ajax({
-        	url : "http://karkare1.cse.iitk.ac.in:8080/api/command/addy",
+        	url : "http://localhost:8000/api/command/addy",
         	type : "POST",
         	data : data,
         	// headers: {
@@ -29,7 +29,7 @@ $(document).ready(function(){
 });
 function draw_command(){
 	$.ajax({
-    	url : "http://karkare1.cse.iitk.ac.in:8080/api/output/addy",
+    	url : "http://localhost:8000/api/output/addy",
     	type : "GET",
     	success : function(data){
     		drawing_commands = drawing_commands+data;

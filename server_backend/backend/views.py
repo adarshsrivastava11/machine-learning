@@ -56,4 +56,5 @@ def add_command(request,username):
 def get_output(request,username):
 	time.sleep(1)
 	output_command = output_commands.find_one_and_delete({"username": username})
+	print output_command
 	return HttpResponse(str(output_command["command"]))

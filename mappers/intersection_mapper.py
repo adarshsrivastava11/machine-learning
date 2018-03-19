@@ -10,7 +10,7 @@ coll_circles = db['circles']
 db2 = client['commands']
 draw_commands = db2['draw_commands']
 
-def circleMapper(center,radius,user):
+def intersectionMapper(center,radius,user):
     circles_map = {
         "user":user,
         "time_added":datetime.now(),
@@ -41,7 +41,7 @@ def circleMapper(center,radius,user):
         g = -p1_x
         f = -p1_y
         c = g**2+f**2-radius**2
-        circles_map["equation"] = "x**2 + y**2 + 2*"+str(g)+" + 2*"+str(f)+" + "+str(c)
+        circles_map["equation"] = "x**2 + y**2 + 2*"+str(g)" + 2*"+str(f)+" + "str(c)
         insert_circle = coll_circles.insert_one(circles_map)
     # fo = open("application-backend/app/assets/js/draw_command"+"_"+user+".js", "a")
     # fo.write("drawCircle("+str(p1_x)+","+str(p1_y)+","+str(radius)+");")

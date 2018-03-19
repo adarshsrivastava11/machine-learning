@@ -29,16 +29,22 @@ socket.setsockopt(zmq.SUBSCRIBE, username)
 coll_coordinates.remove({"user":username})
 coll_lines.remove({"user":username})
 coll_circles.remove({"user":username})
-           
+
+print "Geo Mapper Started"
+       
 while True:
     input_sentence = socket.recv()
     print input_sentence
     input_sentence = input_sentence.split('@')[1]
     input_sentence = eval(input_sentence)
     command = input_sentence["command"]
+    print command
     if command == "Line":
+        print "Line Excuted"
         point_pair = input_sentence["end_points"]
+        print point_pair
         length = input_sentence["length"]
+        print length
         lineMapper(point_pair,length,username)
     if command == "Cut":
         point_pair = input_sentence["end_points"]

@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from pprint import pprint
 from datetime import datetime
-
+import math
 client = MongoClient()
 db = client['geometry']
 coll_coordinates = db['coordinates']
@@ -10,7 +10,8 @@ db2 = client['commands']
 draw_commands = db2['draw_commands']
 
 def lineMapper(points,length,user):
-
+    length = float(length)
+    incline = 0.0
     lines_map = {
     "user":user,
     "time_added":datetime.now(),
@@ -32,8 +33,10 @@ def lineMapper(points,length,user):
     get_point = coll_coordinates.find_one({"point_name" : p1,"user":user})
     p1_x = get_point.get('point_x')
     p1_y = get_point.get('point_y')
-    p2_x = float(p1_x) + float(length)
-    p2_y = p1_y
+    print length
+    print "Hello"
+    p2_x = float(p1_x) + float(length*math.cos(incline))
+    p2_y = float(p1_y) + float(length*math.sin(incline))
     coordinates_map = {
         "user" : user,
         "point_name" : "",
@@ -46,6 +49,9 @@ def lineMapper(points,length,user):
     lines_map["point_1"] = p1
     lines_map["point_2"] = p2
     lines_map["length"] = length
+    lines_map["incline"] = incline
+    m = (p2_y-p1_y)/(p2_x-p1_x)
+    lines_map["equation"] = "(y - "+str(p1_y)+") - "+str(m)+" * (x - "+str(p1_x)+")"
     insert_line = coll_lines.insert_one(lines_map)
 
     # fo = open("application_server/backend/frontend/tt.js", "a")
