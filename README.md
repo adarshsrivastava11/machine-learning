@@ -16,7 +16,7 @@ http://zeromq.org/intro:get-the-software
 http://api.mongodb.com/python/current/installation.html
 ## How to trial run - 
 ```
-2. bash start_server.sh
+1. bash start_server.sh
 ```
 Go to the  displayed address and start typing the commands.
 
