@@ -14,6 +14,8 @@ http://www.django-rest-framework.org
 http://zeromq.org/intro:get-the-software
 ### Installing PyMongo -
 http://api.mongodb.com/python/current/installation.html
+### Installing NLTK - 
+https://www.nltk.org/install.html
 ## How to trial run - 
 ```
 1. bash start_server.sh
